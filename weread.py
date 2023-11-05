@@ -207,11 +207,11 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
         "ISBN": {"rich_text": [{"type": "text", "text": {"content": isbn}}]},
         "URL": {"url": f"https://weread.qq.com/web/reader/{calculate_book_str_id(bookId)}"},
         "Author": {"rich_text": [{"type": "text", "text": {"content": author}}]},
-        # "Sort": {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}},
+        "Sort": {"rich_text": [{"type": "date", "date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S")}}]},
         "Rating": {"number": rating},
         "Cover": {"files": [{"type": "external", "name": "Cover", "external": {"url": cover}}]},
     }
-    properties["Sort"] = {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
+    # properties["Sort"] = {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
     read_info = get_read_info(bookId=bookId)
     if read_info != None:
         markedStatus = read_info.get("markedStatus", 0)
