@@ -232,6 +232,7 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
         properties["ReadingTime"] = {"rich_text": [
             {"type": "text", "text": {"content": format_time}}]}
         if "finishedDate" in read_info:
+            print(read_info.get("finishedDate"))
             properties["Date"] = {"date": {"start": datetime.utcfromtimestamp(read_info.get(
                 "finishedDate")).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
             
