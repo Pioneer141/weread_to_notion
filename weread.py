@@ -229,6 +229,7 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
         if "finishedDate" in read_info:
             properties["Date"] = {"date": {"start": datetime.utcfromtimestamp(read_info.get(
                 "finishedDate")).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
+    properties["Latest"] = {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
 
     icon = {
         "type": "external",
