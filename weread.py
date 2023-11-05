@@ -200,18 +200,17 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
     parent = {
         "database_id": database_id,
         "type": "database_id"
-    }
-    properties = {
-        "BookName": {"title": [{"type": "text", "text": {"content": bookName}}]},
-        "BookId": {"rich_text": [{"type": "text", "text": {"content": bookId}}]},
-        "ISBN": {"rich_text": [{"type": "text", "text": {"content": isbn}}]},
-        "URL": {"url": f"https://weread.qq.com/web/reader/{calculate_book_str_id(bookId)}"},
-        "Author": {"rich_text": [{"type": "text", "text": {"content": author}}]},
-        "Sort": {"rich_text": [{"type": "date", "date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S")}}]},
-        "Rating": {"number": rating},
-        "Cover": {"files": [{"type": "external", "name": "Cover", "external": {"url": cover}}]},
-    }
-    # properties["Sort"] = {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
+        
+    properties = {"BookName": {"title": [{"type": "text", "text": {"content": bookName}}]},
+                  "BookId": {"rich_text": [{"type": "text", "text": {"content": bookId}}]},
+                  "ISBN": {"rich_text": [{"type": "text", "text": {"content": isbn}}]},
+                  "URL": {"url": f"https://weread.qq.com/web/reader/{calculate_book_str_id(bookId)}"},
+                  "Author": {"rich_text": [{"type": "text", "text": {"content": author}}]}, "Sort": {"number": sort},
+                  "Rating": {"number": rating},
+                  "Cover": {"files": [{"type": "external", "name": "Cover", "external": {"url": cover}}]},
+                  "Latest": {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"),
+                                      "time_zone": "Asia/Shanghai"}}}
+    
     read_info = get_read_info(bookId=bookId)
     if read_info != None:
         markedStatus = read_info.get("markedStatus", 0)
@@ -237,7 +236,7 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
             "url": cover
         }
     }
-    # notion api 限制100个block
+    # notion api 限制10000个block
     response = client.pages.create(
         parent=parent, icon=icon, properties=properties)
     id = response["id"]
