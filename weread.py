@@ -245,10 +245,10 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
 
 def add_children(id, children):
     results = []
-    for i in range(0, len(children)//100+1):
+    for i in range(0, len(children)//10000+1):
         time.sleep(0.3)
         response = client.blocks.children.append(
-            block_id=id, children=children[i*100:(i+1)*100])
+            block_id=id, children=children[i*10000:(i+1)*10000])
         results.extend(response.get("results"))
     return results if len(results) == len(children) else None
 
