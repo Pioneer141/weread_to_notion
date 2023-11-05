@@ -33,7 +33,3 @@
         * NOTION_TOKEN
         * NOTION_DATABASE_ID
 
-## 微信群
-
-![image](https://drive.malinkang.com/api/raw/?path=/Pictures/weread2notion.jpg)
-
