@@ -200,7 +200,7 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
     parent = {
         "database_id": database_id,
         "type": "database_id"
-        
+    }   
     properties = {
         "BookName": {"title": [{"type": "text", "text": {"content": bookName}}]},
         "BookId": {"rich_text": [{"type": "text", "text": {"content": bookId}}]},
