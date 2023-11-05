@@ -210,8 +210,10 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
         "Sort": {"number": sort},
         "Rating": {"number": rating},
         "Cover": {"files": [{"type": "external", "name": "Cover", "external": {"url": cover}}]},
-        "Latest": {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}},
     }
+
+    properties["Latest"] = {"date": {"start": datetime.utcfromtimestamp(sort).strftime("%Y-%m-%d %H:%M:%S"), "time_zone": "Asia/Shanghai"}}
+
     read_info = get_read_info(bookId=bookId)
     if read_info != None:
         markedStatus = read_info.get("markedStatus", 0)
