@@ -204,6 +204,8 @@ def insert_to_notion(bookName, bookId, cover, sort, author,isbn,rating):
         "database_id": database_id,
         "type": "database_id"
     }
+    cover= cover.replace('/s_', '/t9_') 
+     """更换cover为更高清图片"""
     properties = {
         "BookName": {"title": [{"type": "text", "text": {"content": bookName}}]},
         "BookId": {"rich_text": [{"type": "text", "text": {"content": bookId}}]},
